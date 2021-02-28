@@ -1,0 +1,13 @@
+node {   
+   stage 'Checkout'   
+   git url: 'file:///D:/MyGITPipeline'   
+           
+   def mvnHome = tool 'maven3.5'  
+   def javaHome = tool 'java8'      
+   stage('Build'){  
+     echo 'Building the code'
+     bat "%JAVA_HOME%/bin/javac.exe src/Test.java"
+     bat "${mvnHome}/bin/mvn package" 
+     echo 'Building the code done'      
+   }
+}

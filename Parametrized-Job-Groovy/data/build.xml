@@ -1,0 +1,65 @@
+<project name="Jenkins-Parameterized-Job" default="run" basedir=".">	 
+	 
+
+<!--The jenklins parameters are available as environment variables. as in shell ($FOO, %FOO%) or Ant ( ${env.FOO} ) can access these values.-->
+
+
+	<property name="user" value="Ashok Gupta" />
+	<property name="releaseBuild" value="ClientApp" />
+	<property name="dateOfBirth" value="02051975" />
+
+<!--The property environment provides all environment variables as Ant properties prefixed by "env.". For example, CLASSPATH would be accessible in Ant as ${env.CLASSPATH}.-->
+
+	<property environment="env"/>
+
+ 
+	 
+    <target name="run" depends="checkos, Windows,Linux "> 
+       <echo message="Target Run for Parameterized Job "/>	
+       	
+		
+    	 <echo message="The user is  ${user}"/>	
+    	 <echo message="The app release is  ${releaseBuild}"/>
+    	<echo message="The user is  ${user}"/>
+<echo message="Number of Processors = ${env.NUMBER_OF_PROCESSORS}"/>
+  <echo message="ANT_HOME is set to = ${env.ANT_HOME}"/>
+
+<echo message="Env data is set to = ${env.Data}"/>
+<echo message="Properyty data is set to = ${Data}"/>
+
+
+
+ <!--Disply all env properties-->
+
+     <echoproperties/>
+		
+        
+      </target>		
+
+<target name="checkos">
+    <condition property="isWindows" value="true">
+            <os family="windows" />
+    </condition> 
+
+    <condition property="isLinux" value="true">
+            <os family="unix" /> 
+    </condition>
+</target>
+
+
+<target name="Windows" if="isWindows">
+     
+<echo message="The OS is Windows"/>    	
+     
+</target>
+ 
+<target name="Linux" if="isLinux">
+     
+<echo message="The OS is Linux"/>    	
+     
+</target>
+ 
+
+
+</project>
+

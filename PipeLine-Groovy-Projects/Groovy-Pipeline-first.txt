@@ -1,0 +1,24 @@
+node {
+    stage 'Checkout'
+    echo 'checkout'
+    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'file:///D:/MyApps']]])
+    
+  
+    stage 'build'
+     echo 'Building the code'
+     isUnix()
+     build 'Job3'
+     
+     stage('Test') {
+    // some block
+}
+     
+      stage 'Test1'
+      env.Build='Dev'
+    echo 'testing the code'
+    step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'prakash.badhe@agilesoft.in', sendToIndividuals: false])
+    mail bcc: '', body: 'Hi,It is here ', cc: '', from: 'prakash.badhe@agilesoft.in', replyTo: 'prakash.badhe@agilesoft.in', subject: 'PipeLine Test Mail from ', to: 'prakash.badhe@agilesoft.in'
+
+   stage 'deploy'
+    echo "Deploying"
+}

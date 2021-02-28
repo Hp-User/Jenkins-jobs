@@ -1,0 +1,21 @@
+<project name="Build Job1" default="run" basedir=".">
+	 
+
+<target name="run" description="This explicitly create failure or success.">
+
+ <echo message="This is build Job1 with a failure"/>
+
+ <!--fail/--><!--will exit the current build-->
+
+
+ <!--will exit the current build by throwing an exception -->
+
+
+	<fail message="The build Exception occurred."/>
+ 
+ </target>
+
+ 
+
+</project>
+

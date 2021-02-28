@@ -1,0 +1,81 @@
+//Code snippet that outputs all job names
+
+def instance= hudson.model.Hudson.instance
+   instance.getItems(hudson.model.Project).each {project ->
+   println(project.displayName)//name
+   println(project.lastBuild.result)//print status
+}
+
+
+ //extract n from LEVEL_n (implemented as closure):
+def level = { name ->
+  def ret = 0
+  name.eachMatch(~'LEVEL_([1-9]+[0-9*])', {ret = it[1].toInteger()})
+  return ret
+}
+ println level
+
+ //gets the statuse for all the latest builds
+def instance = hudson.model.Hudson.instance
+instance.getItems(hudson.model.Project).each {project ->
+  println(project.lastBuild.result)
+}
+
+
+//set the System Admin e-mail address in the Jenkins configuration
+import jenkins.model.*
+
+def jenkinsLocationConfiguration = JenkinsLocationConfiguration.get()
+
+jenkinsLocationConfiguration.setAdminAddress("[your admin name] <[your admin email address]>")
+
+jenkinsLocationConfiguration.save()
+
+//Set the mail server configuration
+
+mport jenkins.model.*
+
+def inst = Jenkins.getInstance()
+
+def desc = inst.getDescriptor("hudson.tasks.Mailer")
+
+desc.setSmtpAuth("[SMTP user]", "[SMTP password]")
+desc.setReplyToAddress("[reply to email address]")
+desc.setSmtpHost("[SMTP host]")
+desc.setUseSsl([true or false to use SLL])
+desc.setSmtpPort("[SMTP port]")
+desc.setCharset("[character set]")
+
+desc.save()
+
+//Set the number of executors
+import jenkins.model.*
+
+def instance = Jenkins.getInstance()
+
+instance.setNumExecutors(0)
+
+instance.save()
+
+//To get the builds
+def job = Jenkins.instance.getItemByFullName(‘MY_JOB_NAME’)
+println job.builds
+
+  // access the last build 
+ 
+def lastBuild = job.lastBuild
+
+ //To  access the current ongoing build in build script
+def thr = Thread.currentThread()
+def currentJob = thr?.executable
+
+
+//Access the current workspace  
+
+currentJob.workspace. 
+
+//Create a temporary folder inside the workspace, 
+
+
+String tempFolderPath = currentJob.workspace.createTempDir("tempFolder", null).getRemote()
+ 

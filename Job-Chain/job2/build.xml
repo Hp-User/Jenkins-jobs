@@ -1,0 +1,12 @@
+<project name="Build Job2" default="run" basedir=".">
+	 
+
+<target name="run" description="This explicitly create failure or success.">
+  <echo message="This is build Job2"/>
+ 
+ </target>
+
+ 
+
+</project>
+
